@@ -255,6 +255,38 @@ A TRADE WILL START FOR A COIN IF THAT COIN REACHES A LONG LEVEL OF 3 OR HIGHER W
 
 ---
 
+### Configuration Management System
+- **Unified Configuration**: Centralized configuration management with YAML format
+- **Config Validation**: Schema validation and constraint checking (trading, notifications, system)
+- **Environment Variables**: POWERTRADER_ prefix overrides (KUCOIN_API_KEY, EMAIL_ADDRESS, etc.)
+- **Hot-Reload Support**: File watcher for automatic configuration reloading
+- **Migration Path**: Seamless migration from existing gui_settings.json
+- **Configuration Dataclasses**: TradingConfig, NotificationConfig, ExchangeConfig, AnalyticsConfig, SystemConfig
+- **ConfigManager Singleton**: Global access with get_config() function
+- **Callback System**: Configuration change notifications for GUI integration
+- **Export Methods**: dict and JSON export for GUI settings panel
+- **Retention Policies**: Configurable log file rotation and backup retention
+
+**Modules**: pt_config.py (628 lines)
+
+---
+
+### Structured Logging System
+- **Structured JSON Logging**: JSON-formatted log entries with timestamps, levels, modules
+- **Console & File Handlers**: Dual output (human-readable console, structured file)
+- **Log Rotation**: Automatic rotation by file size (configurable max size)
+- **Retention Policies**: Backup log retention (configurable count)
+- **Critical Notifications**: Integration with pt_notifications.py for critical log events
+- **Specialized Loggers**: Module-specific loggers (main, trader, thinker, analytics, notifications, exchanges)
+- **Search Functionality**: Query logs by level, module, or text
+- **Summary Generation**: By-level and by-module log summaries for dashboard
+- **Color-Coded Console**: DEBUG, INFO, WARNING, ERROR, CRITICAL with colors
+- **Performance Tracking**: API call timing and performance metrics logging
+
+**Modules**: pt_logging.py (538 lines)
+
+---
+
 ## Documentation
 
 - **README.md**: This file - main project documentation, setup, and usage
@@ -295,7 +327,13 @@ A TRADE WILL START FOR A COIN IF THAT COIN REACHES A LONG LEVEL OF 3 OR HIGHER W
 - pt_correlation.py (447 lines) - Multi-asset correlation analysis
 - pt_position_sizing.py (414 lines) - Volatility-adjusted position sizing
 
-**Total**: 15 Python modules, ~16,364 lines of code
+**Configuration Management (1 file)**:
+- pt_config.py (628 lines) - Unified configuration management with hot-reload
+
+**Logging System (1 file)**:
+- pt_logging.py (538 lines) - Structured JSON logging with rotation
+
+**Total**: 17 Python modules, ~17,530 lines of code
 
 ---
 
