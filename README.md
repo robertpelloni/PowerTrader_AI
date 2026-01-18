@@ -155,12 +155,122 @@ You don’t need to manually start separate programs. The hub handles everything
 ## Neural Levels (the LONG/SHORT numbers)
 
 - These are signal strength levels from low to high.
-- They are the predicted high and low prices for all timeframes from 1hr to 1wk.
-- They are used to show how stretched a coin's price is and for determining when to start trades and potentially when to DCA for the first few levels of DCA (Whichever price is higher, the Neural level or the hardcoded drawdown % for the current DCA level.
+- They are predicted high and low prices for all timeframes from 1hr to 1wk.
+- They are used to show how stretched a coin's price is and for determining when to start trades and potentially when to DCA for the first few levels of DCA (Whichever price is higher, Neural level or hardcoded drawdown % for the current DCA level).
 - Higher number = stronger signal.
 - LONG = buy-direction signal. SHORT = No-start signal
 
 A TRADE WILL START FOR A COIN IF THAT COIN REACHES A LONG LEVEL OF 3 OR HIGHER WHILE HAVING A SHORT LEVEL OF 0! This is adjustable in the settings.
+
+---
+
+## Features (Version 2.0.0 - 2026-01-18)
+
+### Analytics Integration System
+- **Persistent Trade Journal**: SQLite-based database logging for all trades
+- **Performance Tracking**: Real-time metrics including win rate, P&L, Sharpe ratio, max drawdown
+- **Trade Group IDs**: Automatic linking of entries, DCAs, and exits for complete trade tracking
+- **Dashboard Widgets**: Real-time KPI cards and period comparison tables
+- **Integration**: Single-point integration into pt_trader.py with graceful fallback
+
+**Modules**: pt_analytics.py (770 lines), pt_analytics_dashboard.py (262 lines)
+
+### Analytics Dashboard
+- **KPI Cards**: Total trades, win rate, today's P&L, max drawdown
+- **Performance Tables**: Period comparisons (all-time, 7 days, 30 days)
+- **Real-time Updates**: Auto-refresh with 5-second cache interval
+- **GUI Integration**: Dedicated ANALYTICS tab in pt_hub.py
+
+---
+
+### Multi-Exchange Price Aggregation
+- **Unified Interface**: ExchangeManager for KuCoin, Binance, and Coinbase
+- **Cross-Exchange Price**: Median/VWAP across multiple exchanges
+- **Arbitrage Monitoring**: Automatic detection of price spreads between exchanges
+- **Fallback Chain**: KuCoin → Binance → Coinbase for reliability
+- **Real-time Verification**: Price data verification before trading decisions
+
+**Modules**: pt_exchanges.py (1006 lines), pt_thinker_exchanges.py (100 lines)
+
+---
+
+### Notification System
+- **Multi-Platform Support**: Email (Gmail), Discord (webhooks), Telegram (bot)
+- **Unified Interface**: Single NotificationManager for all platforms
+- **Rate Limiting**: Platform-specific limits (Email: 2/hr, Discord: 30/min, Telegram: 20/min)
+- **Notification Levels**: INFO, WARNING, ERROR, CRITICAL with color coding
+- **Configuration**: JSON-based configuration file
+- **SQLite Logging**: All sent notifications logged for audit trail
+- **Async Support**: Non-blocking notifications via asyncio
+
+**Modules**: pt_notifications.py (876 lines)
+
+---
+
+### Volume Analysis System
+- **Technical Indicators**: SMA, EMA, VWAP calculations
+- **Volume Trend Detection**: Increasing, decreasing, or stable analysis
+- **Anomaly Detection**: Z-score based statistical outlier detection
+- **CLI Tools**: Backtesting utilities for volume-based strategies
+
+**Modules**: pt_volume.py (237 lines)
+
+---
+
+### Version Management
+- **Single Source of Truth**: VERSION.md contains project version number
+- **Dynamic Display**: Version number shown in GUI header (v2.0.0)
+- **Automated Bumping**: Version increments with each release
+- **Change Tracking**: Comprehensive CHANGELOG.md documenting all changes
+- **Documentation**: ROADMAP.md and MODULE_INDEX.md for project inventory
+
+**Files**: VERSION.md (current version), CHANGELOG.md, ROADMAP.md, MODULE_INDEX.md
+
+---
+
+## Documentation
+
+- **README.md**: This file - main project documentation, setup, and usage
+- **CHANGELOG.md**: Complete version history with all changes documented
+- **ROADMAP.md**: Current status and future feature planning
+- **MODULE_INDEX.md**: Complete inventory of all modules with versions and locations
+- **UNIVERSAL_LLM_INSTRUCTIONS.md**: Universal guidelines for all AI agents
+- **Model-Specific Files**: CLAUDE.md (Claude), GEMINI.md (Gemini), GPT.md (GPT), copilot-instructions.md (Copilot)
+- **AGENTS.md**: Comprehensive agent instruction documentation
+- **MCP_SERVERS_RESEARCH.md**: Research on 25+ MCP servers and financial libraries
+
+---
+
+## Project Structure
+
+**Core System (5 files)**:
+- pt_hub.py (5,835 lines) - Main GUI and orchestration hub
+- pt_thinker.py (1,381 lines) - Price prediction AI
+- pt_trader.py (2,421 lines) - Trade execution engine
+- pt_trainer.py (1,625 lines) - AI training system
+- pt_backtester.py (876 lines) - Historical strategy testing
+
+**Analytics System (3 files)**:
+- pt_analytics.py (770 lines) - SQLite trade journal
+- pt_analytics_dashboard.py (262 lines) - Dashboard widgets
+
+**Exchange System (2 files)**:
+- pt_exchanges.py (1006 lines) - Multi-exchange manager
+- pt_thinker_exchanges.py (100 lines) - Exchange integration wrapper
+
+**Notification System (2 files)**:
+- pt_notifications.py (876 lines) - Unified notification system
+
+**Volume Analysis (1 file)**:
+- pt_volume.py (237 lines) - Volume metrics and analysis
+
+**Total**: 13 Python modules, ~15,503 lines of code
+
+---
+
+## License
+
+PowerTrader AI is released under **Apache 2.0** license.
 
 ---
 
