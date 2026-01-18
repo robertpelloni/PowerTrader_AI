@@ -5,3 +5,8 @@ colorama
 cryptography
 PyNaCl
 kucoin-python
+
+# Notifications
+yagmail
+discord-webhook
+python-telegram-bot
