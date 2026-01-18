@@ -58,56 +58,31 @@ This roadmap outlines the development history, current status, and future plans 
 - [x] **ROADMAP.md** - Feature planning and status
 - [x] **NOTIFICATIONS_README.md** - Notification system documentation
 - [x] **NOTIFICATION_INTEGRATION.md** - Integration guide
+- [x] **MCP_SERVERS_RESEARCH.md** - Research on 25+ MCP servers and financial libraries
+
+#### Multi-Asset Correlation Analysis
+- [x] **Correlation Calculator** (pt_correlation.py - 447 lines)
+  - Portfolio correlation based on position sizes (weighted)
+  - Historical correlation tracking with 7/30/90-day periods
+  - Diversification alerts for high correlations (>0.8 threshold)
+  - Correlation matrix calculation for multiple assets
+  - Integration points ready for pt_thinker.py and pt_analytics.py
+
+#### Volatility-Adjusted Position Sizing
+- [x] **Position Sizer** (pt_position_sizing.py - 414 lines)
+  - ATR (Average True Range) calculation for volatility measurement
+  - True Range calculation for accurate volatility assessment
+  - Risk-adjusted position sizing with configurable min/max (1% to 10%)
+  - Volatility factor adjustment based on ATR %
+  - Market volatility data retrieval from analytics database
+  - Complete sizing recommendation system
+  - Main testing function with sample data generation
 
 ---
 
 ## Version 3.0.0 - Planned Features (Future)
 
 ### High Priority 🔴
-
-#### Multi-Asset Correlation Analysis
-**Status:** Not Started
-**Module:** pt_correlation.py (planned)
-**Lines:** ~400-600 estimated
-**Dependencies:** pandas, numpy, scipy
-**Description:**
-- Calculate correlation matrix between trading pairs
-- Real-time correlation monitoring
-- Alert when correlation exceeds threshold (avoid buying correlated assets)
-- Historical correlation analysis
-- Integration with pt_thinker.py for trade decisions
-- Dashboard visualization in pt_analytics_dashboard.py
-
-**Implementation Details:**
-```python
-class CorrelationAnalyzer:
-    def calculate_correlation_matrix(self, symbols: List[str], timeframe: str) -> pd.DataFrame
-    def detect_high_correlation(self, symbol: str, threshold: float = 0.8) -> List[Tuple[str, float]]
-    def get_correlation_history(self, symbol_a: str, symbol_b: str, period: int = 30) -> pd.Series
-    def generate_correlation_alert(self, symbol: str, correlated_symbols: List[Tuple[str, float]]) -> str
-```
-
-#### Volatility-Adjusted Position Sizing
-**Status:** Not Started
-**Module:** pt_position_sizing.py (planned)
-**Lines:** ~300-400 estimated
-**Dependencies:** pandas, numpy
-**Description:**
-- Calculate ATR (Average True Range) for volatility
-- Standard deviation-based volatility estimation
-- Dynamic position sizing based on volatility
-- Kelly Criterion integration (optional)
-- Integration with pt_trader.py for trade sizing
-- Dashboard metrics for position sizing effectiveness
-
-**Implementation Details:**
-```python
-class PositionSizer:
-    def calculate_atr(self, symbol: str, period: int = 14) -> float
-    def calculate_volatility(self, symbol: str, period: int = 30) -> float
-    def calculate_position_size(self, account_value: float, symbol: str, risk_per_trade: float = 0.02) -> float
-    def apply_kelly_criterion(self, win_rate: float, avg_win: float, avg_loss: float) -> float
-```
 
 #### Configuration Management System
 **Status:** Not Started

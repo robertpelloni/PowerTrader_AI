@@ -78,15 +78,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Version display in GUI
   - Automated version bumping with commits
 
-- **Comprehensive Documentation**
-  - NOTIFICATIONS_README.md - Complete notification system documentation
-  - NOTIFICATION_INTEGRATION.md - Integration guide for notifications
-  - MODULE_INDEX.md - Submodule inventory with versions and locations
-  - UNIVERSAL_LLM_INSTRUCTIONS.md - Universal AI agent instructions
-  - CLAUDE.md - Claude model-specific instructions
-  - GEMINI.md - Gemini model-specific instructions
-  - GPT.md - GPT model-specific instructions
-  - AGENTS.md - Comprehensive agent instruction documentation
+ - **Comprehensive Documentation**
+   - NOTIFICATIONS_README.md - Complete notification system documentation
+   - NOTIFICATION_INTEGRATION.md - Integration guide for notifications
+   - MODULE_INDEX.md - Submodule inventory with versions and locations
+   - UNIVERSAL_LLM_INSTRUCTIONS.md - Universal AI agent instructions
+   - CLAUDE.md - Claude model-specific instructions
+   - GEMINI.md - Gemini model-specific instructions
+   - GPT.md - GPT model-specific instructions
+   - AGENTS.md - Comprehensive agent instruction documentation
+   - MCP_SERVERS_RESEARCH.md - Research on 25+ MCP servers and financial libraries
+
+ - **Multi-Asset Correlation Analysis** (pt_correlation.py - 447 lines)
+   - CorrelationCalculator class for computing correlations
+   - Portfolio correlation based on position sizes (weighted)
+   - Historical correlation tracking with 7/30/90-day periods
+   - Diversification alerts for high correlations (>0.8 threshold)
+   - Correlation matrix calculation for multiple assets
+   - Integration points ready for pt_thinker.py and pt_analytics.py
+
+ - **Volatility-Adjusted Position Sizing** (pt_position_sizing.py - 414 lines)
+   - VolatilityMetrics and PositionSizingResult dataclasses
+   - PositionSizer class with ATR (Average True Range) calculation
+   - True Range calculation for accurate volatility measurement
+   - Risk-adjusted position sizing with configurable min/max (1% to 10%)
+   - Volatility factor adjustment based on ATR %
+     - Low volatility (<1%): 1.5x position size
+     - Medium volatility (1-2%): 1.25x position size
+     - High volatility (>5%): 0.75x position size
+     - Very high volatility (>8%): 0.5x position size
+   - Market volatility data retrieval from analytics database
+   - Complete sizing recommendation system with volatility level classification
+   - Main testing function with sample data generation
 
 ### Changed
 - **pt_trader.py** - Integrated analytics logging into _record_trade() method (~50 lines)
