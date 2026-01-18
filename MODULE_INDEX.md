@@ -7,8 +7,8 @@ This document provides a comprehensive inventory of all modules, submodules, and
 **Project Name:** PowerTrader AI
 **Current Version:** 2.0.0
 **Build Date:** 2026-01-18
-**Total Python Files:** 13
-**Total Lines of Code:** 15,503
+**Total Python Files:** 15
+**Total Lines of Code:** 16,364
 **License:** Apache 2.0
 
 ## Module Directory Structure
@@ -34,12 +34,16 @@ PowerTrader_AI/
 │   ├── pt_notifications.py            # Unified notification system
 │   └── pt_notifications_examples.py   # Usage examples
 │
-├── Volume Analysis (1 file)
-│   └── pt_volume.py                   # Volume metrics & analysis
-│
-├── Testing (1 file)
-│   └── test_notifications.py          # Notification system tests
-│
+ ├── Volume Analysis (1 file)
+ │   └── pt_volume.py                   # Volume metrics & analysis
+ │
+ ├── Risk Management (2 files)
+ │   ├── pt_correlation.py             # Multi-asset correlation analysis
+ │   └── pt_position_sizing.py         # Volatility-adjusted position sizing
+ │
+ ├── Testing (1 file)
+ │   └── test_notifications.py          # Notification system tests
+ │
 ├── Documentation & Config (8 files)
 │   ├── README.md                      # Main documentation
 │   ├── CHANGELOG.md                   # Version history
@@ -508,9 +512,84 @@ Volume-based metrics and analysis system.
 
 ---
 
+## Risk Management Modules
+
+### 13. pt_correlation.py
+**Version:** 2.0.0 (NEW)
+**Location:** `C:\Users\hyper\workspace\PowerTrader_AI\pt_correlation.py`
+**Lines of Code:** 447
+**Status:** Production
+**Created:** 2026-01-18
+
+**Description:**
+Multi-asset correlation analysis system for portfolio diversification and risk management.
+
+**Key Classes:**
+- `CorrelationCalculator` - Core correlation calculation engine
+- `CorrelationAlert` - Alert dataclass for high correlation events
+
+**Key Features:**
+- Portfolio correlation based on position sizes (weighted)
+- Historical correlation tracking (7/30/90-day periods)
+- Diversification alerts when correlations exceed threshold (>0.8)
+- Correlation matrix calculation for multiple assets
+- Pearson correlation coefficient computation
+
+**Dependencies:**
+- pandas, numpy (data processing)
+- sqlite3 (analytics database)
+- datetime (timestamps)
+
+**Integration Points:**
+- Ready for integration with pt_thinker.py (trade decision enhancement)
+- Ready for integration with pt_analytics.py (portfolio metrics)
+- Standalone usage for correlation analysis
+
+---
+
+### 14. pt_position_sizing.py
+**Version:** 2.0.0 (NEW)
+**Location:** `C:\Users\hyper\workspace\PowerTrader_AI\pt_position_sizing.py`
+**Lines of Code:** 414
+**Status:** Production
+**Created:** 2026-01-18
+
+**Description:**
+Volatility-adjusted position sizing system using Average True Range (ATR) for optimized risk management.
+
+**Key Classes:**
+- `PositionSizer` - Position sizing calculation engine
+- `VolatilityMetrics` - Volatility metric dataclass
+- `PositionSizingResult` - Sizing result dataclass
+
+**Key Features:**
+- 14-period ATR (Average True Range) calculation
+- True Range calculation for accurate volatility measurement
+- Risk-adjusted position sizing (configurable 1%-10% of account)
+- Volatility factor adjustment based on ATR %:
+  - Low volatility (<1%): 1.5x position size increase
+  - Medium volatility (1-2%): 1.25x position size increase
+  - High volatility (>5%): 0.75x position size reduction
+  - Very high volatility (>8%): 0.5x position size reduction
+- Market volatility data retrieval from analytics database
+- Complete sizing recommendation system with volatility classification (LOW/MEDIUM/HIGH)
+
+**Dependencies:**
+- pandas, numpy (data processing)
+- sqlite3 (analytics database)
+- datetime (timestamps)
+
+**Integration Points:**
+- Ready for integration with pt_trader.py (position sizing before trades)
+- Ready for integration with pt_analytics.py (log position sizes)
+- Ready for integration with pt_hub.py (configurable settings GUI)
+- Standalone testing with sample data generation
+
+---
+
 ## Testing Modules
 
-### 13. test_notifications.py
+### 15. test_notifications.py
 **Version:** 2.0.0 (NEW)
 **Location:** `C:\Users\hyper\workspace\PowerTrader_AI\test_notifications.py`
 **Lines of Code:** 205
@@ -543,7 +622,7 @@ Automated unit tests for the notification system.
 
 ## Configuration & Data Files
 
-### 14. requirements.txt
+### 16. requirements.txt
 **Version:** 2.0.0
 **Location:** `C:\Users\hyper\workspace\PowerTrader_AI\requirements.txt`
 **Purpose:** Python dependencies
@@ -570,6 +649,9 @@ python-telegram-bot
 # Exchange integration (NEW in v2.0.0)
 python-binance
 coinbase-advanced-trade-python
+
+# Risk management (NEW in v2.0.0)
+scipy  # For correlation analysis
 
 # Development (optional)
 pytest
@@ -737,14 +819,14 @@ pt_volume.py (Volume Analysis) ← NEW
 - pt_exchanges.py (exchange manager complete)
 - pt_notifications.py (notification system complete)
 - pt_volume.py (volume analysis complete)
+- pt_correlation.py (correlation analysis complete)
+- pt_position_sizing.py (position sizing complete)
 
 ---
 
 ## Future Module Plans (v3.0.0)
 
 ### Planned Modules
-- pt_correlation.py - Multi-asset correlation analysis
-- pt_position_sizing.py - Volatility-adjusted position sizing
 - pt_config.py - Configuration management system
 - pt_logging.py - Structured logging system
 - pt_risk_management.py - Advanced risk management

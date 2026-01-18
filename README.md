@@ -217,6 +217,33 @@ A TRADE WILL START FOR A COIN IF THAT COIN REACHES A LONG LEVEL OF 3 OR HIGHER W
 
 ---
 
+### Multi-Asset Correlation Analysis
+- **Portfolio Correlation Calculation**: Position-weighted correlation analysis
+- **Historical Correlation Tracking**: 7/30/90-day correlation periods
+- **Diversification Alerts**: Automatic alerts when correlations exceed thresholds (>0.8)
+- **Correlation Matrix**: Multi-asset correlation computation
+- **Integration Ready**: Integration points for pt_thinker.py and pt_analytics.py
+
+**Modules**: pt_correlation.py (447 lines)
+
+---
+
+### Volatility-Adjusted Position Sizing
+- **ATR Calculation**: 14-period Average True Range for volatility measurement
+- **True Range Calculation**: Accurate volatility assessment using high/low/close
+- **Risk-Adjusted Sizing**: Position sizes based on configurable risk (1%-10% of account)
+- **Volatility Factor Adjustment**: Dynamic position sizing based on ATR %
+  - Low volatility (<1%): 1.5x position size
+  - Medium volatility (1-2%): 1.25x position size
+  - High volatility (>5%): 0.75x position size
+  - Very high volatility (>8%): 0.5x position size
+- **Market Volatility Data**: Volatility metrics retrieval from analytics database
+- **Complete Recommendation System**: Position sizing with volatility level classification
+
+**Modules**: pt_position_sizing.py (414 lines)
+
+---
+
 ### Version Management
 - **Single Source of Truth**: VERSION.md contains project version number
 - **Dynamic Display**: Version number shown in GUI header (v2.0.0)
@@ -237,7 +264,7 @@ A TRADE WILL START FOR A COIN IF THAT COIN REACHES A LONG LEVEL OF 3 OR HIGHER W
 - **UNIVERSAL_LLM_INSTRUCTIONS.md**: Universal guidelines for all AI agents
 - **Model-Specific Files**: CLAUDE.md (Claude), GEMINI.md (Gemini), GPT.md (GPT), copilot-instructions.md (Copilot)
 - **AGENTS.md**: Comprehensive agent instruction documentation
-- **MCP_SERVERS_RESEARCH.md**: Research on 25+ MCP servers and financial libraries
+- **MCP_SERVERS_RESEARCH.md**: Research on 25+ MCP servers and financial libraries for future integration
 
 ---
 
@@ -264,7 +291,11 @@ A TRADE WILL START FOR A COIN IF THAT COIN REACHES A LONG LEVEL OF 3 OR HIGHER W
 **Volume Analysis (1 file)**:
 - pt_volume.py (237 lines) - Volume metrics and analysis
 
-**Total**: 13 Python modules, ~15,503 lines of code
+**Risk Management (2 files)**:
+- pt_correlation.py (447 lines) - Multi-asset correlation analysis
+- pt_position_sizing.py (414 lines) - Volatility-adjusted position sizing
+
+**Total**: 15 Python modules, ~16,364 lines of code
 
 ---
 
